@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <span class="titulo">{{ titulo | uppercase }}</span>
+          <form class="mt-3" [formGroup]="libroForm" (ngSubmit)="agregarLibro()">
+            <div class="mb-3">
+              <input type="text" formControlName="titulo" class="form-control form-control-lg" placeholder="Título">
+              <div class="text-danger" *ngIf="libroForm.get('titulo')?.hasError('required') && libroForm.get('titulo')?.touched">
+                <span>El título del libro <strong>es obligatorio</strong></span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input type="text" formControlName="autor" class="form-control form-control-lg" placeholder="Autor">
+              <div class="text-danger" *ngIf="libroForm.get('autor')?.hasError('required') && libroForm.get('autor')?.touched">
+                <span>El autor <strong>es obligatorio</strong></span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <textarea formControlName="descripcion" class="form-control form-control-lg" placeholder="Descripción"></textarea>
+            </div>
+            <div class="mb-3">
+              <input type="number" formControlName="precio" class="form-control form-control-lg" placeholder="Precio">
+              <div class="text-danger" *ngIf="libroForm.get('precio')?.hasError('required') && libroForm.get('precio')?.touched">
+                <span>El precio <strong>es obligatorio</strong></span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input type="number" formControlName="stock" class="form-control form-control-lg" placeholder="Stock">
+              <div class="text-danger" *ngIf="libroForm.get('stock')?.hasError('required') && libroForm.get('stock')?.touched">
+                <span>El stock <strong>es obligatorio</strong></span>
+              </div>
+            </div>
+            <!--Start seleccionar categoria-->
+            <div class="mb-3">
+              <select formControlName="categoria_id" class="form-control form-control-lg">
+                <option value="">Seleccionar categoría</option>
+                <option *ngFor="let categoria of categorias" [value]="categoria.categoria_id">
+                  {{ categoria.nombre }}
+                </option>
+              </select>
+              <div class="text-danger" *ngIf="libroForm.get('categoria_id')?.hasError('required') && libroForm.get('categoria_id')?.touched">
+                <span>La categoría <strong>es obligatoria</strong></span>
+              </div>
+              <div class="mt-2">
+                <a routerLink="/crear-categoria">Crear nueva categoría</a>
+              </div>
+            </div>
+            <!--End seleccionar categoria-->
+            <div class="mb-3">
+              <button routerLink="/libros" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+              <button type="submit" [disabled]="libroForm.invalid" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

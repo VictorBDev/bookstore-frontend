@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <span class="titulo">LISTADO DE CATEGORIAS</span>
+          <button class="btn btn-success float-end" routerLink="/crear-categoria">NUEVA</button>
+          <button class="btn btn-primary" routerLink="/libros">LIBROS</button>
+          <table *ngIf="listCategorias.length > 0" class="table table-striped mt-3">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Area</th>
+                <th scope="col">Descripción</th>
+              </tr>
+            </thead>
+            <tbody> <!-- Agregado la clase text-center aquí -->
+              <tr *ngFor="let categoria of listCategorias">
+                <td>{{ categoria.nombre }}</td>
+                <td>{{ categoria.descripcion }}</td>
+                <td>
+                  <i [routerLink]="['/editar-categoria', categoria.categoria_id]" class="fas fa-edit text-primary"></i>
+                  <i (click)="eliminarCategoria(categoria.categoria_id)" class="fas fa-trash text-danger"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 style="text-align: start; margin-top: 10px;" *ngIf="listCategorias.length == 0">No hay categorías para mostrar</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
