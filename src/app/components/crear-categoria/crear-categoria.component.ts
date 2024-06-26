@@ -12,26 +12,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CrearCategoriaComponent implements OnInit {
   categoriaForm: FormGroup;
   titulo = "Crear categoría";
-  //new
   categoria_id: string | null;
 
   constructor(
     private fb: FormBuilder,
     private categoriaService: CategoriaService,
     private router: Router,
-    //new
     private aRouter: ActivatedRoute,
   ) {
     this.categoriaForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['']
     });
-    //new
+    
     this.categoria_id = this.aRouter.snapshot.paramMap.get('categoria_id');
   }
 
   ngOnInit(): void {
-    //new
     this.esEditar();
   }
 
@@ -41,11 +38,11 @@ export class CrearCategoriaComponent implements OnInit {
       descripcion: this.categoriaForm.get('descripcion')?.value
     };
     console.log('Datos de categoría a enviar:', CATEGORIA); // Log para depuración
-    //new
     if (this.categoria_id !== null) {
       //editar categoria
       this.categoriaService.editarCategoria(this.categoria_id, CATEGORIA).subscribe(() => {
         console.log('Categoría actualizada con éxito'); // Log para depuración
+        this.categoriaService.actualizarCategorias();
         this.router.navigate(['/categorias']);
       }, error => {
         console.error('Error al actualizar categoría:', error);// Log para depuración
@@ -54,21 +51,14 @@ export class CrearCategoriaComponent implements OnInit {
       //Agregar categoria
       this.categoriaService.guardarCategoria(CATEGORIA).subscribe(() => {
         console.log('Categoría guardada con éxito'); // Log para depuración
+        this.categoriaService.actualizarCategorias();
         this.router.navigate(['/categorias']);
       }, error => {
         console.error('Error al guardar categoría:', error);// Log para depuración
       });
     }
-    //coment old to see if new works
-    // this.categoriaService.guardarCategoria(CATEGORIA).subscribe(() => {
-    //   console.log('Categoría guardada con éxito'); // Log para depuración
-    //   this.router.navigate(['/categorias']);
-    // }, error => {
-    //   console.error('Error al guardar categoría:', error);
-    // });
   }
 
-  //new
   esEditar() {
     if (this.categoria_id !== null) {
       this.titulo = "Editar categoría";

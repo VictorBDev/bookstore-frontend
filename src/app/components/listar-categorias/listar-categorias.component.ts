@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../services/categoria.service';
 import { Categoria } from '../../models/categoria';
-//add new import
 import { Router } from '@angular/router';
 
 @Component({
@@ -40,8 +39,8 @@ export class ListarCategoriasComponent implements OnInit {
     this.router.navigate(['/editar-categoria', categoria_id]);
   }
 
-  eliminarCategoria(id: any) {
-    this._categoriaService.eliminarCategoria(id).subscribe(data => {
+  eliminarCategoria(categoria_id: any) {
+    this._categoriaService.eliminarCategoria(categoria_id).subscribe(data => {
       this.obtenerCategorias();
     }, error => {
       console.log('Error al eliminar categoría:', error);

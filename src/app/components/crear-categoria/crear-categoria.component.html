@@ -4,6 +4,9 @@
       <div class="card">
         <div class="card-body text-center">
           <span class="titulo">{{ titulo | uppercase }}</span>
+          <div class="mt-2 float-end">
+            <button routerLink="/categorias" class="btn btn-secondary btn-sm float-end">IR A LIBROS</button>
+          </div>
           <form class="mt-3" [formGroup]="categoriaForm" (ngSubmit)="agregarCategoria()">
             <div class="mb-3">
               <input type="text" formControlName="nombre" class="form-control form-control-lg"
@@ -22,7 +25,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <button routerLink="/categorias" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+              <button routerLink="/categorias" class="btn btn-secondary btn-sm float-start">IR A CATEGORIAS</button>
               <button type="submit" [disabled]="categoriaForm.invalid" class="btn btn-success btn-lg float-end">ACEPTAR</button>
             </div>
           </form>

@@ -2,10 +2,17 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Libro } from '../models/libro';
+import { Categoria } from '../models/categoria';
+
+//interface para obtener libros con categoria
+export interface LibroConCategoria extends Libro {
+  Categoria?: Categoria;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class LibroService {
 
   url = 'http://localhost:4000/api/libros';
@@ -13,9 +20,9 @@ export class LibroService {
   private libros$: Subject<Libro[]> = new Subject<Libro[]>();
 
   constructor(private http: HttpClient) { }
-
-  getLibros(): Observable<Libro[]> {
-    return this.http.get<Libro[]>(this.url);
+  //new method para obtener libros con categoria
+  getLibros(): Observable<LibroConCategoria[]> {
+    return this.http.get<LibroConCategoria[]>(this.url);
   }
 
   eliminarLibro(libro_id: string): Observable<void> {
