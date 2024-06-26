@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../services/categoria.service';
 import { Categoria } from '../../models/categoria';
+//add new import
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-categorias',
   templateUrl: './listar-categorias.component.html',
   styleUrl: './listar-categorias.component.css'
 })
-export class ListarCategoriasComponent {
+
+//ad implements OnInit
+export class ListarCategoriasComponent implements OnInit {
 
   listCategorias: Categoria[] = [];
-  constructor(private _categoriaService: CategoriaService) { }
+  //add new attribute private router
+  constructor(private _categoriaService: CategoriaService, private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerCategorias();
@@ -30,11 +35,16 @@ export class ListarCategoriasComponent {
     });
   }
 
+  //add new method:
+  editarCategoria(categoria_id: any) {
+    this.router.navigate(['/editar-categoria', categoria_id]);
+  }
+
   eliminarCategoria(id: any) {
     this._categoriaService.eliminarCategoria(id).subscribe(data => {
       this.obtenerCategorias();
     }, error => {
-      console.log(error);
+      console.log('Error al eliminar categoría:', error);
     });
   }
 

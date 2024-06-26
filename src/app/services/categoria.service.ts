@@ -17,20 +17,20 @@ export class CategoriaService {
   getCategorias(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(this.url);
   }
-
-  eliminarCategoria(categoria_id: number): Observable<void> {
+  //de number a string
+  eliminarCategoria(categoria_id: string): Observable<void> {
     return this.http.delete<void>(`${this.url}/${categoria_id}`);
   }
 
   guardarCategoria(categoria: Categoria): Observable<Categoria> {
     return this.http.post<Categoria>(this.url, categoria);
   }
-
-  obtenerCategoria(categoria_id: number): Observable<Categoria> {
+  //de number a string
+  obtenerCategoria(categoria_id: string): Observable<Categoria> {
     return this.http.get<Categoria>(`${this.url}/${categoria_id}`);
   }
-
-  editarCategoria(categoria_id: number, categoria: Categoria): Observable<Categoria> {
+  //de number a string
+  editarCategoria(categoria_id: string, categoria: Categoria): Observable<Categoria> {
     return this.http.put<Categoria>(`${this.url}/${categoria_id}`, categoria);
   }
 
